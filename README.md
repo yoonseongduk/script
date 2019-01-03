@@ -69,13 +69,31 @@
 
     o cd /isc/logs001/DAILY 에 다음 script 를 확인한다.
     link.sh, all_get.sh, cpu_get.sh, disk_get.sh, disk_ios.rexx, mem_get.sh, net_get.sh, net_ios.rexx
+    cp ./script/initial/nmon_bmon/* /isc/logs001/DAILY/
 
-1.3 mkdir /etc/hosts.group
-cd /etc/hosts.group 에서 host_list.sh grp_only -update 수행…
+    vi /etc/hosts
+    ---------------------------
+    192.168.200.41   bon02-01             #:bon02-01
+    192.168.200.42   bon02-02             #:bon02-02
+    192.168.200.43   bon02-03             #:bon02-03
+    192.168.200.52   bon02-04             #:bon02-04
 
-1.4 /usr/local/bin/nmon_logger_hour.rexx  수행
-(정상 확인후 :  cron 등록 )
-# nmon logget 
-4   * * * * /usr/local/bin/nmon_logget_hour.rexx > /usr/local/bin/nmon_logget_hour.log 2>&1
-59 23 * * * /usr/local/bin/nmon_logget_hour.rexx > /usr/local/bin/nmon_logget_hour.log 2>&1
+    ##############
+    ## bon02-01 ##
+    ##############
+    192.168.200.180  ubuntu1604sdy V0 V1  #:bon02-01
+    -----------------------------
+   
+    mkdir /etc/hosts.group
+    cd /etc/hosts.group 에서 host_list.sh grp_only -update  ## 수행 ##
+    
+    cd /usr/local/bin
+    grep -r pstadm .
+    sed -i 's/pstadm/xadmop01/g' nmon*
+
+    o /usr/local/bin/nmon_logger_hour.rexx  수행
+    (정상 확인후 :  cron 등록 )
+    # nmon logget 
+    4   * * * * /usr/local/bin/nmon_logget_hour.rexx > /usr/local/bin/nmon_logget_hour.log 2>&1
+    59 23 * * * /usr/local/bin/nmon_logget_hour.rexx > /usr/local/bin/nmon_logget_hour.log 2>&1
 
