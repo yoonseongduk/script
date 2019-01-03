@@ -21,3 +21,18 @@
     /tmp/000*  ${host_ipaddress}
     
     
+# www : workload graph 
+
+## requirement resource 
+
+   var_www.tar.gz 
+   
+   
+
+## apache install
+
+    apt-get install apache2
+
+    mkdir /var/www
+    cd /var; tar -xvf var_www.tar.gz
+    
